@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Маълумоти Сафар | Платформаи Ҷустуҷӯи Попутчик</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+        .trip-card {
+            background-color: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+        }
+        .trip-card h3 {
+            margin-top: 0;
+        }
+        .trip-info {
+            margin: 10px 0;
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .danger-button {
+            background-color: #ff4d4d;
+            color: white;
+        }
+        .danger-button:hover {
+            background-color: #ff1a1a;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Маълумоти Сафар</h1>
+    </header>
+
+    <div class="container">
+        <div class="trip-card">
+            <h3>{{ trip.start_location }} - {{ trip.end_location }}</h3>
+            <p class="trip-details">Дата ва Вақт: {{ trip.date }}</p>
+            <p class="trip-details">Ҷойҳои холӣ: {{ trip.seats_available }}</p>
+            {% if trip.description %}
+                <p class="trip-details"><strong>Тавсиф:</strong> {{ trip.description }}</p>
+            {% else %}
+                <p class="trip-details"><em>Тавсиф дастрас нест.</em></p>
+            {% endif %}
+
+            <!-- Links for Update and Delete -->
+            <a href="{% url 'update_trip' trip.id %}" class="button">Таҳрир</a>
+            <a href="{% url 'delete_trip' trip.id %}" class="button danger-button">Ҳалфшуда</a>
+        </div>
+    </div>
+</body>
+</html>

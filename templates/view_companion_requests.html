@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="tj">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ҳамсафарҳои дархостшуда</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #3498db;
+            padding: 10px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .trip-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .trip-item {
+            background-color: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .trip-details {
+            flex: 1;
+        }
+
+        .trip-actions {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .trip-actions a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .trip-actions a:hover {
+            color: #2980b9;
+        }
+
+        .add-request-button {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .add-request-button:hover {
+            background-color: #2980b9;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Ҳамсафарҳои дархостшуда</h1>
+    </header>
+
+    <div class="container">
+        <h2>Рӯйхати дархостҳои ҳамсафар</h2>
+
+        <div class="trip-list">
+            {% for request in companion_requests %}
+            <div class="trip-item">
+                <div class="trip-details">
+                    <h3>{{ request.start_location }} → {{ request.end_location }}</h3>
+                    <p><strong>Маъзарат: </strong>{{ request.date }}</p>
+                    <p><strong>Тавсиф: </strong>{{ request.description }}</p>
+                </div>
+                <div class="trip-actions">
+                    <a href="{% url 'edit_companion_request' request.id %}">Таҳрир кардани дархост</a>
+                    <a href="{% url 'delete_companion_request' request.id %}">Ҳал кардани дархост</a>
+                </div>
+            </div>
+            {% empty %}
+            <p>Ҳеҷ дархости ҳамсафар вуҷуд надорад. Лутфан дархости нав эҷод кунед.</p>
+            {% endfor %}
+        </div>
+
+        <a href="{% url 'add_companion_request' %}" class="add-request-button">Иҷод кардани дархости нав</a>
+
+    </div>
+
+</body>
+</html>
